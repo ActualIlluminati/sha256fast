@@ -5,7 +5,7 @@ fn main() {
 
     let data = "abc";
     let mut out: [u8; 32] = [0; 32];
-    for i in 0..10_000_000 {
+    for _ in 0..10_000_000 {
         unsafe {
             let mut sctx = sha256_new();
             sha256_update(&mut sctx, data.as_ptr(), 3);
