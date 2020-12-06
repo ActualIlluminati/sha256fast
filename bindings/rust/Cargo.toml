@@ -1,0 +1,50 @@
+[package]
+name = "sha256fast"
+version = "0.0.0"
+authors = ["Deni Sukhonina <d.sukhonina@gmail.com>"]
+edition = "2018"
+license = "Apache-2.0"
+description = "Bindings for SHA256 library"
+repository = "https://github.com/ActualIlluminati/sha256-simd"
+readme = "README.md"
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+    "README.md",
+    "rustfmt.toml",
+    # "blst/src/*.c",
+    # "blst/src/*.h",
+    # "blst/build/**",
+    # "blst/src/asm/*.pl",
+    # "blst/bindings/blst.h",
+    # "blst/bindings/blst_aux.h",
+]
+
+[features]
+# Binary can be executed on systems similar to the host.
+default = []
+# Binary can be executed on all systems.
+portable = []
+
+[build-dependencies]
+# cc = "1.0"
+# glob = "0.3"
+
+[dependencies]
+# threadpool = "^1.8.1"
+# zeroize = { version = "^1.1", features = ["zeroize_derive"] }
+
+[dev-dependencies]
+# rand = "0.7"
+# rand_chacha = "0.2"
+criterion = "0.3"
+
+[[bench]]
+name = "benches"
+harness = false
+
+[profile.release]
+opt-level = 3
+
+[badges]
+maintenance = { status = "actively-developed" }
