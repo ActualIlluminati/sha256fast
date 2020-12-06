@@ -48,6 +48,10 @@
 # This code schedules 2 blocks at a time, with 4 lanes per block
 ########################################################################
 
+#
+# Contains https://lkml.org/lkml/2019/7/30/1276
+#
+
 ## assume buffers not aligned
 #define	VMOVDQ vmovdqu
 
@@ -591,19 +595,27 @@ last_block_enter:
 
 .align 16
 loop1:
-	vpaddd	K256+0*32(SRND), X0, XFER
+	# vpaddd	K256+0*32(SRND), X0, XFER
+        leaq	K256(%rip), INP
+        vpaddd	0*32(INP, SRND), X0, XFER
 	vmovdqa XFER, 0*32+_XFER(%rsp, SRND)
 	FOUR_ROUNDS_AND_SCHED	_XFER + 0*32
 
-	vpaddd	K256+1*32(SRND), X0, XFER
+	# vpaddd	K256+1*32(SRND), X0, XFER
+        leaq	K256(%rip), INP
+        vpaddd	1*32(INP, SRND), X0, XFER
 	vmovdqa XFER, 1*32+_XFER(%rsp, SRND)
 	FOUR_ROUNDS_AND_SCHED	_XFER + 1*32
 
-	vpaddd	K256+2*32(SRND), X0, XFER
+        # vpaddd	K256+2*32(SRND), X0, XFER
+        leaq	K256(%rip), INP
+        vpaddd	2*32(INP, SRND), X0, XFER
 	vmovdqa XFER, 2*32+_XFER(%rsp, SRND)
 	FOUR_ROUNDS_AND_SCHED	_XFER + 2*32
 
-	vpaddd	K256+3*32(SRND), X0, XFER
+	# vpaddd	K256+3*32(SRND), X0, XFER
+        leaq	K256(%rip), INP
+        vpaddd	3*32(INP, SRND), X0, XFER
 	vmovdqa XFER, 3*32+_XFER(%rsp, SRND)
 	FOUR_ROUNDS_AND_SCHED	_XFER + 3*32
 
@@ -613,11 +625,15 @@ loop1:
 
 loop2:
 	## Do last 16 rounds with no scheduling
-	vpaddd	K256+0*32(SRND), X0, XFER
+	# vpaddd	K256+0*32(SRND), X0, XFER
+        leaq	K256(%rip), INP
+        vpaddd	0*32(INP, SRND), X0, XFER
 	vmovdqa XFER, 0*32+_XFER(%rsp, SRND)
 	DO_4ROUNDS	_XFER + 0*32
 
-	vpaddd	K256+1*32(SRND), X1, XFER
+	# vpaddd	K256+1*32(SRND), X1, XFER
+        leaq	K256(%rip), INP
+        vpaddd	1*32(INP, SRND), X1, XFER
 	vmovdqa XFER, 1*32+_XFER(%rsp, SRND)
 	DO_4ROUNDS	_XFER + 1*32
 	add	$2*32, SRND
@@ -715,7 +731,6 @@ done_hash:
 .size sha256_transform_rorx,.-sha256_transform_rorx
 
 .section	.rodata.cst512.K256, "aM", @progbits, 512
-.globl K256
 .align 64
 K256:
 	.long	0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5
