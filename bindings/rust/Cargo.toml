@@ -1,6 +1,6 @@
 [package]
 name = "sha256fast"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Deni Sukhonina <d.sukhonina@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
@@ -12,8 +12,9 @@ include = [
     "Cargo.toml",
     "README.md",
     "rustfmt.toml",
-    # "blst/src/*.c",
-    # "blst/src/*.h",
+    "sha256fast/src/*.cxx",
+    "sha256fast/src/*.hxx",
+    "sha256fast/src/*.S",
     # "blst/build/**",
     # "blst/src/asm/*.pl",
     # "blst/bindings/blst.h",

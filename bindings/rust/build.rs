@@ -48,14 +48,13 @@ fn main() {
     };
     println!("Using sha256fast source directory {}", sha256fast_base_dir.display());
 
-    // let c_src_dir = sha256fast_base_dir.join("src");
-    let c_src_dir = sha256fast_base_dir.clone();
+    let c_src_dir = sha256fast_base_dir.join("src");
 
     // file_vec.push(c_src_dir.join("sha256-generic.cxx"));
     // file_vec.push(c_src_dir.join("sha256-ssse3.cxx"));
     file_vec.push(c_src_dir.join("sha256-avx2.cxx"));
     #[cfg(all(target_pointer_width = "64"))]
-    assembly(&mut file_vec, &sha256fast_base_dir);
+    assembly(&mut file_vec, &c_src_dir);
 
     // Set CC environment variable to choose alternative C compiler.
     // Optimization level depends on whether or not --release is passed
