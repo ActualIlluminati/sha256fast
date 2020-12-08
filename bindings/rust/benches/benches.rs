@@ -1,23 +1,15 @@
-// Copyright Supranational LLC
+// Copyright Deni Sukhonina
 // Licensed under the Apache License, Version 2.0, see LICENSE for details.
 // SPDX-License-Identifier: Apache-2.0
 
-use sha256fast::*;
+use sha256fast::{Digest, Sha256};
 
 use criterion::{criterion_group, criterion_main, Criterion};
 
 fn bench_abc(c: &mut Criterion) {
-    let data = "abc";
-    let mut out: [u8; 32] = [0; 32];
+    let data = b"abc";
 
-    c.bench_function("fib 20", |b| {
-        b.iter(|| unsafe {
-                   let mut sctx = sha256_new();
-                   sha256_update(&mut sctx, data.as_ptr(), 3);
-                   sha256_final(&mut sctx, out.as_mut_ptr());
-               })
-    });
-
+    c.bench_function("sha256: abc", |b| b.iter(|| { let _ = Sha256::digest(data); }));
 }
 
 criterion_group!(benches, bench_abc);
