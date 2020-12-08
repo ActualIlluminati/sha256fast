@@ -1,20 +1,21 @@
 [package]
 name = "sha256fast"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Deni Sukhonina <d.sukhonina@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
 description = "Bindings for SHA256 library"
-repository = "https://github.com/ActualIlluminati/sha256-simd"
+repository = "https://github.com/ActualIlluminati/sha256fast"
 readme = "README.md"
+keywords = ["sha256", "simd", "ssse3", "avx", "avx2"]
 include = [
     "**/*.rs",
     "Cargo.toml",
     "README.md",
     "rustfmt.toml",
-    "sha256fast/src/*.cxx",
-    "sha256fast/src/*.hxx",
-    "sha256fast/src/*.S",
+    "src/*.cxx",
+    "src/*.hxx",
+    "src/*.S",
     # "blst/build/**",
     # "blst/src/asm/*.pl",
     # "blst/bindings/blst.h",
