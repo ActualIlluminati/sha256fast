@@ -27,13 +27,16 @@ include = [
 default = []
 # Binary can be executed on all systems.
 portable = []
+# Expose compress function
+compress = []
 
 [build-dependencies]
 cc = "1.0"
 # glob = "0.3"
 
 [dependencies]
-digest = "0.9"
+digest = "~0.9"
+opaque-debug = "~0.3"
 # threadpool = "^1.8.1"
 # zeroize = { version = "^1.1", features = ["zeroize_derive"] }
 
@@ -42,8 +45,6 @@ digest = "0.9"
 
 [dev-dependencies]
 digest = { version = "0.9", features = ["dev"] }
-# rand = "0.7"
-# rand_chacha = "0.2"
 criterion = "0.3"
 
 [[bench]]

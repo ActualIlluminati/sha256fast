@@ -14,7 +14,7 @@ const SHA256_H6: u32 = 0x1f83d9ab;
 const SHA256_H7: u32 = 0x5be0cd19;
 
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone)]
 pub struct Sha256State {
     pub state: [u32; SHA256_STATE_LEN],
     pub count: u64,
